@@ -7,14 +7,16 @@ import firebase from "firebase";
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   useEffect(() => {
-    db.collection('todos')
-      .orderBy('timestamp', 'desc')
-      .onSnapshot(snapshot => {
-        setTodos(snapshot.docs.map(doc => ({id:doc.id , todo: doc.data().todo})))
-      })
+    db.collection("todos")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setTodos(
+          snapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data().todo }))
+        );
+      });
   }, []);
 
   const addTodo = (event) => {
@@ -23,8 +25,6 @@ function App() {
       todo: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
-
-    // setTodos([...todos, input]);
     setInput("");
   };
   return (
@@ -32,7 +32,7 @@ function App() {
       <h1>TODO APP</h1>
       <form>
         <FormControl>
-          <InputLabel>Creat a TODO</InputLabel>
+          <InputLabel>Create a TODO</InputLabel>
           <Input
             value={input}
             onChange={(event) => setInput(event.target.value)}
@@ -48,9 +48,8 @@ function App() {
           Add Task
         </Button>
       </form>
-
       <ul>
-        {todos.map(todo => (
+        {todos.map((todo) => (
           <Todo todo={todo} />
         ))}
       </ul>

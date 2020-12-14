@@ -1,3 +1,8 @@
 .todo__list{
     text-align: center;
+    font-weight: bolder;
+}
+.text{
+    font-weight: bolder;
+    font-size: larger;
 }
